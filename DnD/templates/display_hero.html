@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+OSRIC DnD - Find a Hero
+{% endblock %}
+
+{% block content %}
+    <h1>Find a Hero</h1>
+    <form action="" method="post">
+        {{form.hidden_tag()}}
+        <article>
+            <p>
+                Type in a Hero's ID here: <input type="text" name="hero_id">
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+        </article>
+    </form>
+{% endblock %}
+
+{% block hero %}
+    <h2>
+        Hero Name: {{ hero_data.name }}
+    </h2>
+    <p>Attribute 1: {{hero_data.attr1}}</p>
+    <p>Attribute 2: {{hero_data.attr2}}</p>
+    <p>Attribute 3: {{hero_data.attr3}}</p>
+{% endblock %}
