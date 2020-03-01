@@ -13,7 +13,6 @@
         <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
-
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">OSRIC - DnD</h1>
@@ -31,19 +30,14 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
+                {% block sidebar %}
+                {% endblock %}
+
                 {% block content %}
                 {% endblock %}
 
-                {% block sidebar %}
-                {% endblock %}
             </div> <!-- #main -->
         </div> <!-- #main-container -->
-
-        <div class="footer-container">
-            <footer class="wrapper">
-                <h3>footer</h3>
-            </footer>
-        </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

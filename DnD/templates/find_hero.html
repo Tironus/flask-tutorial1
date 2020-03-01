@@ -16,4 +16,8 @@ OSRIC DnD - Find a Hero
             </p>
         </article>
     </form>
+
+    {% for hero in heroes %}
+    <li>{{ hero }}</li>
+    {% endfor %}
 {% endblock %}
