@@ -1,11 +1,11 @@
 import dnd_db
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash
 import dnd_extensions
 import dnd_forms
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dev'
+app.config['SECRET_KEY'] = '\xb0B\x03f\x08\x84\xe8\xc7\xf2Y\x9e\x8bT\xcc\xd0\x03\xba\xb3f\x8a9\x95\xae\xa6'
 
 @app.route('/')
 @app.route('/index')
@@ -19,6 +19,7 @@ def find_hero():
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
         heroes = dnd_db.display_name(mdb, form.hero.data)
+        flash("Search Query Issued...")
     return render_template('find_hero.html', heroes=heroes, form=form, hero_name=form.hero.data)
 
 @app.route('/display_hero', methods=["GET", "POST"])
@@ -28,7 +29,18 @@ def display_hero():
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
         hero_data = dnd_db.display_id(mdb, ObjectId(form.hero_id.data))
+        flash("Hero Query Issued...")
     return render_template('display_hero.html', form=form, hero_data=hero_data)
+
+@app.route('/create_hero', methods=["GET", "POST"])
+def create_hero():
+    form = dnd_forms.CreateHeroForm()
+    if request.method == "POST":
+        mdb = dnd_extensions.mongo_client.OSRIC
+        ret = dnd_db.create_doc(mdb, form.name.data, form.attr2.data, form.attr2.data, form.attr3.data)
+        flash("Hero created...{}".format(ret.inserted_id))
+    return render_template('create_hero.html', form=form)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

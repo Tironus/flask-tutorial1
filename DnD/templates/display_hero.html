@@ -20,10 +20,14 @@ OSRIC DnD - Display a Hero
 {% endblock %}
 
 {% block hero %}
-    <h2>
-        Hero Name: {{ hero_data.name }}
-    </h2>
-    <p>Attribute 1: {{hero_data.attr1}}</p>
-    <p>Attribute 2: {{hero_data.attr2}}</p>
-    <p>Attribute 3: {{hero_data.attr3}}</p>
+    <table>
+        <tr>
+            <td>Hero Name</td>
+            <td>{{ hero_data.name }}</td>
+        </tr>
+        <tr>
+            <td>Attribute 1</td>
+            <td>{{ hero_data.attr1 }}</td>
+        </tr>
+    </table>
 {% endblock %}

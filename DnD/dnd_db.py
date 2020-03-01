@@ -3,8 +3,8 @@ from bson.objectid import ObjectId
 def create_doc(mongo_db, name, attr1=None, attr2=None, attr3=None):
     character = {
         'name' : name,
-        'attr1' : attr1,
-        'attr2' : attr2,
+        'strength' : attr1,
+        'dexterity' : attr2,
         'attr3' : attr3,
     }
 

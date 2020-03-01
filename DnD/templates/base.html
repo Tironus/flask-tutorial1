@@ -20,7 +20,7 @@
                     <ul>
                         <li><a href="{{ url_for('find_hero') }}">Find Hero</a></li>
                         <li><a href="{{ url_for('display_hero') }}">Display Hero</a></li>
-                        <li><a href="#">Create Hero</a></li>
+                        <li><a href="{{ url_for('create_hero') }}">Create Hero</a></li>
                         <li><a href="#">Edit Hero</a></li>
                         <li><a href="#">Delete Hero</a></li>
                     </ul>
@@ -30,9 +30,22 @@
 
         <div class="main-container">
             <div class="main wrapper clearfix">
+                <article class="flashes">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </article>
+            </div>
+        </div>
 
-                {% block sidebar %}
-                {% endblock %}
+        <div class="main-container">
+            <div class="main wrapper clearfix">
 
                 {% block content %}
                 {% endblock %}
@@ -44,6 +57,15 @@
             </div>
         </div> <!-- #main-container -->
 
+        <div class="footer-container">
+            <header class="wrapper clearfix">
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
