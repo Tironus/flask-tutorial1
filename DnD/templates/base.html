@@ -19,6 +19,7 @@
                 <nav>
                     <ul>
                         <li><a href="{{ url_for('find_hero') }}">Find Hero</a></li>
+                        <li><a href="{{ url_for('display_hero') }}>Display Hero</a></li>
                         <li><a href="#">Create Hero</a></li>
                         <li><a href="#">Edit Hero</a></li>
                         <li><a href="#">Delete Hero</a></li>
@@ -37,6 +38,10 @@
                 {% endblock %}
 
             </div> <!-- #main -->
+            <div class="main wrapper clearfix">
+                {% block hero %}
+                {% endblock %}
+            </div>
         </div> <!-- #main-container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -1,9 +1,10 @@
 import dnd_db
 from flask import Flask, render_template, url_for, request
-from dnd_extensions import mongo_client
-from dnd_forms import FindHeroForm
+import dnd_extensions
+import dnd_forms
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'dev'
 
 @app.route('/')
 @app.route('/index')
@@ -12,11 +13,12 @@ def dnd():
 
 @app.route('/find_hero', methods=["GET", "POST"])
 def find_hero():
+    heroes = []
+    form = dnd_forms.FindHeroForm()
     if request.method == "POST":
-        form = forms.FindHeroForm()
-        mdb = mongo_client.OSRIC
-        heroes = dnd_db.display_name(mdb, orm.character_name.data)
-    return render_template('find_hero.html', heroes)
+        mdb = dnd_extensions.mongo_client.OSRIC
+        heroes = dnd_db.display_name(mdb, form.hero.data)
+    return render_template('find_hero.html', heroes=heroes, form=form, hero_name=form.hero.data)
 
 if __name__ == "__main__":
     app.run(debug=True)
