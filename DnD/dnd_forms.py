@@ -1,6 +1,11 @@
 from flask_wtf import Form
-from wtforms.fields import StringField
+from wtforms.fields import StringField, SelectField, SubmitField, IntegerField
 from wtforms.validators import DataRequired
+
+class_choices = [('1', 'ranger'), ('2', 'cleric'), ('3', 'druid'), ('4', 'assassin'), ('5','fighter'), ('6','illusionist'), ('7','magic user'), ('8','paladin'), ('9','thief')]
+align_choices = [('1','lawful good'), ('2','neutral good'), ('3','chaotic good'), ('4','lawful neutral'), ('5','neutral'), ('6', 'chaotic neutral'), ('7','lawful evil'), ('8','neutral evil'), ('9','chaotic evil')]
+race_choices = [('1','dwarves'), ('2','elves'), ('3','gnomes'), ('4','half elves'), ('5','halflings'), ('6','half orcs'), ('7','humans')]
+sex_choices = [('1','male'), ('2','female')]
 
 class FindHeroForm(Form):
     hero = StringField('Hero Name:', validators=[DataRequired()])
@@ -10,6 +15,20 @@ class DisplayHeroForm(Form):
 
 class CreateHeroForm(Form):
     name = StringField('Hero Name:', validators=[DataRequired()])
-    attr1 = StringField('Attribute 1:', validators=[DataRequired()])
-    attr2 = StringField('Attribute 2:', validators=[DataRequired()])
-    attr3 = StringField('Attribute 3:', validators=[DataRequired()])
+    cclass = SelectField('Class:', choices=class_choices)
+    align = SelectField('Alignment:', choices=align_choices)
+    race = SelectField('Race:', choices=race_choices)
+    str = StringField('Strength:', validators=[DataRequired()])
+    dxt = IntegerField('Dexterity:', validators=[DataRequired()])
+    wis = IntegerField('Wisdon:', validators=[DataRequired()])
+    int = IntegerField('Intellect:', validators=[DataRequired()])
+    cha = IntegerField('Charisma:', validators=[DataRequired()])
+    con = IntegerField('Constitution:', validators=[DataRequired()])
+    xp = IntegerField('XP:', validators=[DataRequired()])
+    hp = IntegerField('HP:', validators=[DataRequired()])
+    ac = IntegerField('AC:', validators=[DataRequired()])
+    age = IntegerField('Age:', validators=[DataRequired()])
+    height = StringField('Height:', validators=[DataRequired()])
+    weight = StringField('Weight:', validators=[DataRequired()])
+    sex = SelectField('Sex:', choices=sex_choices)
+    submit = SubmitField('Save Character')

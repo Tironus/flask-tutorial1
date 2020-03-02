@@ -20,14 +20,63 @@ OSRIC DnD - Display a Hero
 {% endblock %}
 
 {% block hero %}
-    <table>
-        <tr>
-            <td>Hero Name</td>
-            <td>{{ hero_data.name }}</td>
-        </tr>
-        <tr>
-            <td>Attribute 1</td>
-            <td>{{ hero_data.attr1 }}</td>
-        </tr>
-    </table>
+    <h2>
+        Hero Name: {{ hero_data.name }}
+    </h2>
+    <div class="row">
+        <div class="column">
+            <h2>Personal Attributes</h2>
+            <p>Class: {{ hero_data.class }}</p>
+            <p>Alignment: {{ hero_data.alignment }}</p>
+            <p>Race: {{ hero_data.race }}</p>
+            <p>XP: {{ hero_data.xp }}</p>
+            <p>HP: {{ hero_data.hp }}</p>
+            <p>AC: {{ hero_data.ac }}</p>
+            <p>Age: {{ hero_data.age }}</p>
+            <p>Height: {{ hero_data.height }}</p>
+            <p>Weight: {{ hero_data.weight }}</p>
+            <p>Sex: {{ hero_data.sex }}</p>
+        </div>
+        <div class="column">
+            <h2>Strength: {{ hero_data.strength }}</h2>
+            <p>To Hit: {{ hero_data.str_to_hit}}</p>
+            <p>Damage: {{ hero_data.str_damage}}</p>
+            <p>Encumbrance: {{ hero_data.str_encumbrance }}</p>
+            <p>Minor Test: {{ hero_data.str_min_test }}</p>
+            <p>Major Test: {{ hero_data.str_maj_test }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <h2>Dexterity: {{ hero_data.dexterity }}</h2>
+            <p>Surprise: {{ hero_data.dxt_surprise }}</p>
+            <p>Missle To Hit: {{ hero_data.dxt_missile_to_hit }}</p>
+            <p>AC: {{ hero_data.dxt_ac }}</p>
+        </div>
+        <div class="column">
+            <h2>Constitution: {{ hero_data.constitution }}</h2>
+            <p>HP: {{hero_data.con_hp}}</p>
+            <p>Major Test: {{hero_data.con_maj_test}}</p>
+            <p>Minor Test: {{hero_data.con_min_test}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <h2>Intellect: {{ hero_data.intellect }}</h2>
+            <p>Add. Languages: {{ hero_data.int_add_lang }}</p>
+        </div>
+        <div class="column">
+            <h2>Wisdom: {{ hero_data.wisdom }}</h2>
+            <p>Mental Save: {{ hero_data.wis_mental_save }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <h2>Charisma: {{ hero_data.charisma }}</h2>
+            <p>Max Henchman: {{ hero_data.cha_max_henchman }}</p>
+            <p>Loyalty: {{ hero_data.cha_loyalty }}</p>
+            <p>Reaction: {{ hero_data.cha_reaction }}</p>
+        </div>
+    </div>
+
 {% endblock %}

@@ -37,8 +37,13 @@ def create_hero():
     form = dnd_forms.CreateHeroForm()
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
-        ret = dnd_db.create_doc(mdb, form.name.data, form.attr2.data, form.attr2.data, form.attr3.data)
-        flash("Hero created...{}".format(ret.inserted_id))
+        ret = dnd_db.find_name(mdb, form.name.data)
+        if ret is None:
+            attribute_list = dnd_db.calculate_character(mdb, form)
+            ret = dnd_db.create_doc(mdb, form.name.data, form, attribute_list)
+            flash("Hero ID created...{}".format(ret.inserted_id))
+        else:
+            flash("Hero ID Exists: {}".format(ret['_id']))
     return render_template('create_hero.html', form=form)
 
 

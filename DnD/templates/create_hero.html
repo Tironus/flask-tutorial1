@@ -10,19 +10,29 @@ OSRIC DnD - Create a Hero
         {{form.hidden_tag()}}
         <article>
             <p>
-                Type in a Hero's name here: <input type="text" name="name">
+                Type in a Hero's name here: {{ form.name }}
             </p>
             <p>
-                Attribute 1: <input type="text" name="attr1">
+                Strength: {{ form.str }}</br>
+                Dexterity: {{ form.dxt }}</br>
+                Wisdom: {{ form.wis }}</br>
+                Intellect: {{ form.int }}</br>
+                Charisma: {{ form.cha }}</br>
+                Constitution: {{ form.con }}</br>
             </p>
             <p>
-                Attribute 2: <input type="text" name="attr2">
+                Class: {{ form.cclass }}</br>
+                Alignment: {{ form.align }}</br>
+                Race: {{ form.race }}</br>
+                XP: {{ form.xp }}</br>
+                HP: {{ form.hp }}</br>
+                AC: {{ form.ac }}</br>
+                Height: {{ form.height }}</br>
+                Weight {{ form.weight }}</br>
+                Sex: {{ form.sex }}</br>
             </p>
             <p>
-                Attribute 3: <input type="text" name="attr3">
-            </p>
-            <p>
-                <button type="submit">Submit</button>
+                {{ form.submit() }}
             </p>
         </article>
     </form>
