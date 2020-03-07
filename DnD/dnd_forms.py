@@ -27,14 +27,14 @@ class DeleteHeroForm(Form):
     def __name__(self):
         return "DeleteHeroForm"
 
-    hero_id = SelectField('Class:', choices=[])
+    hero_id = SelectField('Hero:', choices=[])
     submit = SubmitField('Delete Hero')
 
 class DisplayHeroForm(Form):
     def __name__(self):
         return "DisplayHeroForm"
 
-    hero_id = SelectField('Class:', choices=[])
+    hero_id = SelectField('Hero:', choices=[])
     submit = SubmitField('Display Hero')
 
 class CreateHeroForm(Form):
