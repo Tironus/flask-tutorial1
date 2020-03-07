@@ -8,7 +8,11 @@ def update_hero_list(form):
     mdb = dnd_extensions.mongo_client.OSRIC
     col = mdb['dnd']
     hero_list = dnd_db.find_all_names(col)
-    form.hero_id.choices = hero_list
+    if form.__name__() == 'DisplayHeroForm':
+        form.hero_id.choices = hero_list
+    elif form.__name__() == 'DeleteHeroForm':
+        form.hero_id.choices = hero_list
+
 
 class_choices = [('1', 'ranger'), ('2', 'cleric'), ('3', 'druid'), ('4', 'assassin'), ('5','fighter'), ('6','illusionist'), ('7','magic user'), ('8','paladin'), ('9','thief')]
 align_choices = [('1','lawful good'), ('2','neutral good'), ('3','chaotic good'), ('4','lawful neutral'), ('5','neutral'), ('6', 'chaotic neutral'), ('7','lawful evil'), ('8','neutral evil'), ('9','chaotic evil')]
@@ -19,7 +23,17 @@ sex_choices = [('1','male'), ('2','female')]
 class FindHeroForm(Form):
     hero = StringField('Hero Name:', validators=[DataRequired()])
 
+class DeleteHeroForm(Form):
+    def __name(self):
+        return "DeleteHeroForm"
+
+    hero_id = SelectField('Class:', choices=[])
+    submit = SubmitField('Delete Hero')
+
 class DisplayHeroForm(Form):
+    def __name__(self):
+        return "DisplayHeroForm"
+
     hero_id = SelectField('Class:', choices=[])
     submit = SubmitField('Display Hero')
 

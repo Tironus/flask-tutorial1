@@ -110,6 +110,8 @@ def calculate_character(mongo_db, form_data):
     charisma_score = form_data.cha.data
     max_henchman, loyalty_bonus, reaction_bonus = dnd_calc.calc_charisma(charisma_score)
 
+    # Generate attributes list
+    # primary attribute scores
     attributes_list.append(strength_score)
     attributes_list.append(dexterity_score)
     attributes_list.append(wisdom_score)
@@ -117,23 +119,28 @@ def calculate_character(mongo_db, form_data):
     attributes_list.append(charisma_score)
     attributes_list.append(constitution_score)
 
+    # strength attribute bonuses
     attributes_list.append(to_hit_bonus)
     attributes_list.append(damage_bonus)
     attributes_list.append(encumbrance_bonus)
     attributes_list.append(str_minor_tests_bonus)
     attributes_list.append(str_major_tests_bonus)
 
+    # intellect attribute bonuses
     attributes_list.append(surprise_bonus)
     attributes_list.append(missile_bonus_to_hit)
     attributes_list.append(ac_adjustment)
 
+    # constitution attribute bonuses
     attributes_list.append(hp_bonus)
     attributes_list.append(con_min_test)
     attributes_list.append(con_maj_test)
 
+    # wisdom attribute bonuses
     attributes_list.append(saving_throw_bonus)
     attributes_list.append(additional_lang)
 
+    # charisma attribute bonuses
     attributes_list.append(max_henchman)
     attributes_list.append(loyalty_bonus)
     attributes_list.append(reaction_bonus)
