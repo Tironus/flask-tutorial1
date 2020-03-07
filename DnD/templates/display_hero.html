@@ -9,12 +9,9 @@ OSRIC DnD - Display a Hero
     <form action="" method="post">
         {{form.hidden_tag()}}
         <article>
-            <p>
-                Type in a Hero's ID here: <input type="text" name="hero_id">
-            </p>
-            <p>
-                <button type="submit">Submit</button>
-            </p>
+            <h4>Select Hero: </h4>
+            <p>{{ form.hero_id }}</p>
+            <p>{{ form.submit() }}</p>
         </article>
     </form>
 {% endblock %}

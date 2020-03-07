@@ -58,6 +58,15 @@ def find_name(mongo_db, name):
     result = mongo_db.dnd.find_one(query)
     return result
 
+def find_all_names(col):
+    hero_list = []
+    counter = 1
+    for hero in col.find():
+        hero_list.append((counter, str(hero['name'])))
+        counter += 1
+    print(hero_list)
+    return hero_list
+
 def calculate_character(mongo_db, form_data):
     attributes_list = []
 

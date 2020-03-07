@@ -169,7 +169,16 @@ nav a:hover {
     column-width: 300px;
     padding: 0;
     margin: 0;
-    line-height: 0px;
+    line-height: 10px;
+    margin-bottom: 0;
+}
+.column2 {
+    float: left;
+    width: 20%;
+    column-width: 400px;
+    padding: 0;
+    margin: 10px;
+    line-height: 10px;
     margin-bottom: 0;
 }
 .main article h1 {

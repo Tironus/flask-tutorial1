@@ -32,7 +32,10 @@ def display_hero():
     form = dnd_forms.DisplayHeroForm()
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
-        hero_data = dnd_db.display_id(mdb, ObjectId(form.hero_id.data))
+        col = mdb['dnd']
+        hero_list = dnd_db.find_all_names(col)
+        hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
+        hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
         flash("hero query sent...")
     return render_template('display_hero.html', form=form, hero_data=hero_data)
 
