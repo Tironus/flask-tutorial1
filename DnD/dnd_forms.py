@@ -4,6 +4,11 @@ from wtforms.validators import DataRequired
 import dnd_db
 import dnd_extensions
 
+def update_hero_list(form):
+    mdb = dnd_extensions.mongo_client.OSRIC
+    col = mdb['dnd']
+    hero_list = dnd_db.find_all_names(col)
+    form.hero_id.choices = hero_list
 
 class_choices = [('1', 'ranger'), ('2', 'cleric'), ('3', 'druid'), ('4', 'assassin'), ('5','fighter'), ('6','illusionist'), ('7','magic user'), ('8','paladin'), ('9','thief')]
 align_choices = [('1','lawful good'), ('2','neutral good'), ('3','chaotic good'), ('4','lawful neutral'), ('5','neutral'), ('6', 'chaotic neutral'), ('7','lawful evil'), ('8','neutral evil'), ('9','chaotic evil')]
@@ -15,10 +20,7 @@ class FindHeroForm(Form):
     hero = StringField('Hero Name:', validators=[DataRequired()])
 
 class DisplayHeroForm(Form):
-    mdb = dnd_extensions.mongo_client.OSRIC
-    col = mdb['dnd']
-    hero_list = dnd_db.find_all_names(col)
-    hero_id = SelectField('Class:', choices=hero_list)
+    hero_id = SelectField('Class:', choices=[])
     submit = SubmitField('Display Hero')
 
 class CreateHeroForm(Form):

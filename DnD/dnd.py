@@ -30,6 +30,7 @@ def find_hero():
 def display_hero():
     hero_data = ""
     form = dnd_forms.DisplayHeroForm()
+    dnd_forms.update_hero_list(form)
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
         col = mdb['dnd']
