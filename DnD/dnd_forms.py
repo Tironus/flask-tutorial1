@@ -24,7 +24,7 @@ class FindHeroForm(Form):
     hero = StringField('Hero Name:', validators=[DataRequired()])
 
 class DeleteHeroForm(Form):
-    def __name(self):
+    def __name__(self):
         return "DeleteHeroForm"
 
     hero_id = SelectField('Class:', choices=[])
