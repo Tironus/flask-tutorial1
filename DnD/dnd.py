@@ -1,3 +1,7 @@
+import sys
+from os.path import dirname
+sys.path.append(dirname(__file__))
+
 import dnd_db
 from flask import Flask, render_template, url_for, request, flash
 import dnd_extensions
