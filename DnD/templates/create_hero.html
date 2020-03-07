@@ -9,28 +9,134 @@ OSRIC DnD - Create a Hero
     <form action="" method="post">
         {{form.hidden_tag()}}
         <article>
-            <p>
-                Type in a Hero's name here: {{ form.name }}
-            </p>
-            <p>
-                Strength: {{ form.str }}</br>
-                Dexterity: {{ form.dxt }}</br>
-                Wisdom: {{ form.wis }}</br>
-                Intellect: {{ form.int }}</br>
-                Charisma: {{ form.cha }}</br>
-                Constitution: {{ form.con }}</br>
-            </p>
-            <p>
-                Class: {{ form.cclass }}</br>
-                Alignment: {{ form.align }}</br>
-                Race: {{ form.race }}</br>
-                XP: {{ form.xp }}</br>
-                HP: {{ form.hp }}</br>
-                AC: {{ form.ac }}</br>
-                Height: {{ form.height }}</br>
-                Weight {{ form.weight }}</br>
-                Sex: {{ form.sex }}</br>
-            </p>
+            <div class="row">
+                <div class="column">
+                    <h4>Hero Name:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.name }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Strength:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.str }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Dexterity:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.dxt }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Wisdom:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.wis }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Intellect:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.int }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Charisma:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.cha }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Constitution:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.con }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Class:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.cclass }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Alignment:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.align }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Race:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.race }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>XP:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.xp }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>HP:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.hp }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>AC:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.ac }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Height:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.height }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Weight:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.weight }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h4>Sex:</h4>
+                </div>
+                <div class="column">
+                    <p>{{ form.sex }}</p>
+                </div>
+            </div>
             <p>
                 {{ form.submit() }}
             </p>

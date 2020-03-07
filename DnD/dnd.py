@@ -23,7 +23,7 @@ def find_hero():
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
         heroes = dnd_db.display_name(mdb, form.hero.data)
-        flash("Search Query Issued...")
+        flash("search query sent...")
     return render_template('find_hero.html', heroes=heroes, form=form, hero_name=form.hero.data)
 
 @app.route('/display_hero', methods=["GET", "POST"])
@@ -33,7 +33,7 @@ def display_hero():
     if request.method == "POST":
         mdb = dnd_extensions.mongo_client.OSRIC
         hero_data = dnd_db.display_id(mdb, ObjectId(form.hero_id.data))
-        flash("Hero Query Issued...")
+        flash("hero query sent...")
     return render_template('display_hero.html', form=form, hero_data=hero_data)
 
 @app.route('/create_hero', methods=["GET", "POST"])
@@ -45,9 +45,9 @@ def create_hero():
         if ret is None:
             attribute_list = dnd_db.calculate_character(mdb, form)
             ret = dnd_db.create_doc(mdb, form.name.data, form, attribute_list)
-            flash("Hero ID created...{}".format(ret.inserted_id))
+            flash("hero id created...{}".format(ret.inserted_id))
         else:
-            flash("Hero ID Exists: {}".format(ret['_id']))
+            flash("hero id exists: {}".format(ret['_id']))
     return render_template('create_hero.html', form=form)
 
 

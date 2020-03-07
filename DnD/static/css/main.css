@@ -51,6 +51,16 @@ textarea {
     padding: 0.2em 0;
 }
 
+.row {
+    display: table-row-group;
+    padding: 0;
+    margin: 0;
+}
+
+.parent {
+    display: flex;
+    font-size: 0;
+}
 
 /* ===== Initializr Styles ==================================================
    Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
@@ -98,6 +108,15 @@ body {
     color: white;
 }
 
+.flashes {
+    padding: 0;
+    margin: 0;
+}
+
+.flash-fmt {
+    background: #ffcc80;
+}
+
 /* ==============
     MOBILE: Menu
    ============== */
@@ -120,14 +139,15 @@ nav a {
 }
 
 .nav-b {
-    display: inline;
-    text-align: center;
+    display: inline-table;
+    text-align: left;
     text-decoration: none;
     font-weight: bold;
     font-size: 70%;
 
     color: white;
     background: #002080;
+    line-space: 0;
 }
 
 nav a:hover,
@@ -143,13 +163,14 @@ nav a:hover {
     MOBILE: Main
    ============== */
 
-.main {
-    padding: 30px 0;
-}
-
 .column {
     float: left;
-    width: 10%;
+    width: 33%;
+    column-width: 300px;
+    padding: 0;
+    margin: 0;
+    line-height: 0px;
+    margin-bottom: 0;
 }
 .main article h1 {
     font-size: 2em;
@@ -203,9 +224,7 @@ nav a:hover {
 
     nav a {
         float: left;
-        width: 12%;
-        margin: 0 1.7%;
-        padding: 25px 2%;
+        padding: 10px 2%;
         margin-bottom: 0;
     }
 

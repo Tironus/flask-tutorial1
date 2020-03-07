@@ -21,6 +21,7 @@
                         <li><a class="nav-b" href="#">Create Game</a></li>
                         <li><a class="nav-b" href="#">Find Game</a></li>
                         <li><a class="nav-b" href="#">Create NPC</a></li>
+                        <li><a class="nav-b" href="#">Find NPC</a></li>
                         <li><a class="nav-b" href="#">Edit NPC</a></li>
                         <li><a class="nav-b" href="#">Delete NPC</a></li>
                     </ul>
@@ -29,12 +30,12 @@
         </div>
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title">Character Management</h1>
+                <h1 class="title">Player - Character Management</h1>
                 <nav>
                     <ul>
+                        <li><a href="{{ url_for('create_hero') }}">Create Hero</a></li>
                         <li><a href="{{ url_for('find_hero') }}">Find Hero</a></li>
                         <li><a href="{{ url_for('display_hero') }}">Display Hero</a></li>
-                        <li><a href="{{ url_for('create_hero') }}">Create Hero</a></li>
                         <li><a href="#">Edit Hero</a></li>
                         <li><a href="#">Delete Hero</a></li>
                     </ul>
@@ -49,7 +50,7 @@
                         {% if messages %}
                             <ul>
                                 {% for message in messages %}
-                                    <li>{{ message }}</li>
+                                    <li class="flash-fmt ">{{ message }}</li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
