@@ -224,14 +224,15 @@ def calc_constitution(con_score, cclass):
     return hpb, maj, min
 
 def calc_intelligence(int_score):
+    int_score = int(int_score)
     al = 0
-    if int_score >= 8 or int_score <= 9:
+    if int_score >= 8 and int_score <= 9:
         al += 1
-    elif int_score >= 10 or int_score <= 11:
+    elif int_score >= 10 and int_score <= 11:
         al += 2
-    elif int_score >= 12 or int_score <= 13:
+    elif int_score >= 12 and int_score <= 13:
         al += 3
-    elif int_score >= 14 or int_score <= 15:
+    elif int_score >= 14 and int_score <= 15:
         al += 4
     elif int_score == 16:
         al += 5

@@ -132,12 +132,15 @@ def edit_hero():
                         if form.constitution.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'constitution', form.constitution.data)
                             hpb, maj, min = dnd_calc.calc_constitution(form.constitution.data, hero['class'])
-                            print(hpb)
-                            print(maj)
-                            print(min)
                             dnd_db.edit_hero(mdb, hero['name'], 'con_hp', hpb)
                             dnd_db.edit_hero(mdb, hero['name'], 'con_maj_test', maj)
                             dnd_db.edit_hero(mdb, hero['name'], 'con_min_test', min)
+
+                        if form.intellect.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'intellect', form.intellect.data)
+                            al = dnd_calc.calc_intelligence(form.intellect.data)
+                            print(al)
+                            dnd_db.edit_hero(mdb, hero['name'], 'int_add_lang', al)
 
                         dnd_forms.update_hero_list(mdb, form)
                         hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))

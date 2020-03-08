@@ -19,6 +19,7 @@ def clear_edit_fields(form):
     form.dexterity.data = ""
     form.wisdom.data = ""
     form.constitution.data = ""
+    form.intellect.data = ""
 
 
 class_choices = [('1', 'ranger'), ('2', 'cleric'), ('3', 'druid'), ('4', 'assassin'), ('5','fighter'), ('6','illusionist'), ('7','magic user'), ('8','paladin'), ('9','thief')]
@@ -40,6 +41,7 @@ class EditHeroForm(Form):
     dexterity = StringField('Dexterity:')
     wisdom = StringField('Wisdom:')
     constitution = StringField('Constitution:')
+    intellect = StringField('Intelligence:')
     display_hero = SubmitField('Get Hero Data')
     submit = SubmitField('Edit Hero')
 
