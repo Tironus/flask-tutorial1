@@ -8,10 +8,12 @@ OSRIC DnD - Delete a Hero
     <h1>Delete a Hero</h1>
     <form action="" method="post">
         {{form.hidden_tag()}}
-        <article>
-            <h4>Select Hero: </h4>
-            <p>{{ form.hero_id }}</p>
-            <p>{{ form.submit() }}</p>
-        </article>
+        <div class="row">
+            <div class="column">
+                <h4>Select Hero: </h4>
+                <p>{{ form.hero_id }}</p>
+            </div>
+        </div>
+        <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}
