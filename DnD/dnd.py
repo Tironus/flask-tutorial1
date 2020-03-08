@@ -35,9 +35,12 @@ def display_hero():
         mdb = dnd_extensions.mongo_client.OSRIC
         col = mdb['dnd']
         hero_list = dnd_db.find_all_names(col)
-        hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
-        hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
-        flash("hero query sent...")
+        if len(hero_list) <= 0:
+            flash("no hero to display...")
+        else:
+            hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
+            hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
+            flash("hero query sent...")
     return render_template('display_hero.html', form=form, hero_data=hero_data)
 
 @app.route('/create_hero', methods=["GET", "POST"])

@@ -10,16 +10,16 @@ def create_doc(mongo_db, name, form, attributes):
         'intellect' : attributes[3],
         'charisma' : attributes[4],
         'constitution' : attributes[5],
-        'class': form.cclass.data,
-        'alignment': form.align.data,
-        'race': form.race.data,
+        'class': dict(form.cclass.choices).get(form.cclass.data),
+        'alignment': dict(form.align.choices).get(form.align.data),
+        'race': dict(form.race.choices).get(form.race.data),
         'xp': form.xp.data,
         'hp:': form.hp.data,
         'ac': form.ac.data,
         'age': form.age.data,
         'height': form.height.data,
         'weight': form.weight.data,
-        'sex': form.sex.data,
+        'sex': dict(form.sex.choices).get(form.sex.data),
         'str_to_hit': attributes[6],
         'str_damage': attributes[7],
         'str_encumbrance:': attributes[8],
@@ -69,7 +69,6 @@ def find_all_names(col):
     for hero in col.find():
         hero_list.append((counter, str(hero['name'])))
         counter += 1
-    print(hero_list)
     return hero_list
 
 def calculate_character(mongo_db, form_data):
