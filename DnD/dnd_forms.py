@@ -4,10 +4,8 @@ from wtforms.validators import DataRequired
 import dnd_db
 import dnd_extensions
 
-def update_hero_list(form):
-    mdb = dnd_extensions.mongo_client.OSRIC
-    col = mdb['dnd']
-    hero_list = dnd_db.find_all_names(col)
+def update_hero_list(mdb, form):
+    hero_list = dnd_db.find_all_names(mdb.dnd)
     if form.__name__() == 'DisplayHeroForm':
         form.hero_id.choices = hero_list
     elif form.__name__() == 'DeleteHeroForm':

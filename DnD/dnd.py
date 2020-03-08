@@ -29,16 +29,14 @@ def find_hero():
 @app.route('/display_hero', methods=["GET", "POST"])
 def display_hero():
     hero_data = ""
+    mdb = dnd_extensions.mongo_client.OSRIC
     form = dnd_forms.DisplayHeroForm()
-    dnd_forms.update_hero_list(form)
+    dnd_forms.update_hero_list(mdb, form)
     if request.method == "POST":
-        mdb = dnd_extensions.mongo_client.OSRIC
-        col = mdb['dnd']
-        hero_list = dnd_db.find_all_names(col)
-        if len(hero_list) <= 0:
+        if len(dict(form.hero_id.choices)) <= 0:
             flash("no hero to display...")
         else:
-            hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
+            hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
             hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
             flash("hero query sent...")
     return render_template('display_hero.html', form=form, hero_data=hero_data)
@@ -60,22 +58,20 @@ def create_hero():
 @app.route('/delete_hero', methods=["GET", "POST"])
 def delete_hero():
     hero_data = ""
+    mdb = dnd_extensions.mongo_client.OSRIC
     form = dnd_forms.DeleteHeroForm()
-    dnd_forms.update_hero_list(form)
+    dnd_forms.update_hero_list(mdb, form)
     if request.method == "POST":
-        mdb = dnd_extensions.mongo_client.OSRIC
-        col = mdb['dnd']
-        hero_list = dnd_db.find_all_names(col)
-        if len(hero_list) <= 0:
+        if len(dict(form.hero_id.choices)) <= 0:
             flash("no hero available to delete...")
         else:
-            hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
+            hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
             delete_result = dnd_db.delete_name(mdb, hero['name'])
             if delete_result.raw_result['n'] == 0:
                 flash("hero delete FAILED...")
             elif delete_result.raw_result['n'] == 1:
                 flash("hero delete SUCCESS...")
-            dnd_forms.update_hero_list(form)
+            dnd_forms.update_hero_list(mdb, form)
     return render_template('delete_hero.html', form=form, hero_data=hero_data)
 
 if __name__ == "__main__":
