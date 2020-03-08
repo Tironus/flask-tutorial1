@@ -54,6 +54,23 @@ def create_hero():
             flash("hero id exists: {}".format(ret['_id']))
     return render_template('create_hero.html', form=form)
 
+@app.route('/delete_hero', methods=["GET", "POST"])
+def delete_hero():
+    hero_data = ""
+    form = dnd_forms.DeleteHeroForm()
+    dnd_forms.update_hero_list(form)
+    if request.method == "POST":
+        mdb = dnd_extensions.mongo_client.OSRIC
+        col = mdb['dnd']
+        hero_list = dnd_db.find_all_names(col)
+        hero = dnd_db.find_name(mdb, hero_list[int(form.hero_id.data) - 1][1])
+        delete_result = dnd_db.delete_name(mdb, hero['name'])
+        if delete_result.raw_result['n'] == 0:
+            flash("hero delete FAILED...")
+        elif delete_result.raw_result['n'] == 1:
+            flash("hero delete SUCCESS...")
+        dnd_forms.update_hero_list(form)
+    return render_template('delete_hero.html', form=form, hero_data=hero_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

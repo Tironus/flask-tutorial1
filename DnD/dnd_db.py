@@ -58,6 +58,11 @@ def find_name(mongo_db, name):
     result = mongo_db.dnd.find_one(query)
     return result
 
+def delete_name(mongo_db, name):
+    query = {"name": name}
+    result = mongo_db.dnd.delete_one(query)
+    return result
+
 def find_all_names(col):
     hero_list = []
     counter = 1
