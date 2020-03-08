@@ -106,8 +106,6 @@ def edit_hero():
                         if form.hero_name.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'name', form.hero_name.data)
                             dnd_forms.update_hero_list(mdb, form)
-                            hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
-                            hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
 
                         if form.strength.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'strength', form.strength.data)
