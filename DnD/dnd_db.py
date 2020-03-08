@@ -22,7 +22,7 @@ def create_doc(mongo_db, name, form, attributes):
         'sex': dict(form.sex.choices).get(form.sex.data),
         'str_to_hit': attributes[6],
         'str_damage': attributes[7],
-        'str_encumbrance:': attributes[8],
+        'str_encumbrance': attributes[8],
         'str_min_test': attributes[9],
         'str_maj_test': attributes[10],
         'dxt_surprise': attributes[11],

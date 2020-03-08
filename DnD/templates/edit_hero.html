@@ -92,6 +92,17 @@ OSRIC DnD - Edit a Hero
                 <h4>{{ form.intellect }}</h4>
             </div>
         </div>
+        <div class="row">
+            <div class="column">
+                <h4>{{ form.charisma.label }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ hero_data.charisma }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ form.charisma }}</h4>
+            </div>
+        </div>
         <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}

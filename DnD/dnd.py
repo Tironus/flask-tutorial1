@@ -111,11 +111,16 @@ def edit_hero():
                         if form.strength.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'strength', form.strength.data)
                             to_hit_bonus, damage_bonus, encumbrance_bonus, str_minor_tests_bonus, str_major_tests_bonus = dnd_calc.calc_strength(form.strength.data)
+                            print(to_hit_bonus)
+                            print(damage_bonus)
+                            print(encumbrance_bonus)
+                            print(str_minor_tests_bonus)
+                            print(str_major_tests_bonus)
                             dnd_db.edit_hero(mdb, hero['name'], 'str_to_hit', to_hit_bonus)
                             dnd_db.edit_hero(mdb, hero['name'], 'str_damage', damage_bonus)
-                            dnd_db.edit_hero(mdb, hero['name'], 'str_encumbrance:', encumbrance_bonus)
-                            dnd_db.edit_hero(mdb, hero['name'], 'str_min_test:', str_minor_tests_bonus)
-                            dnd_db.edit_hero(mdb, hero['name'], 'str_maj_test:', str_major_tests_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_encumbrance', encumbrance_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_min_test', str_minor_tests_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_maj_test', str_major_tests_bonus)
 
                         if form.dexterity.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'dexterity', form.dexterity.data)
@@ -139,8 +144,14 @@ def edit_hero():
                         if form.intellect.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'intellect', form.intellect.data)
                             al = dnd_calc.calc_intelligence(form.intellect.data)
-                            print(al)
                             dnd_db.edit_hero(mdb, hero['name'], 'int_add_lang', al)
+
+                        if form.charisma.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'charisma', form.charisma.data)
+                            mh, loy, rea = dnd_calc.calc_charisma(form.charisma.data)
+                            dnd_db.edit_hero(mdb, hero['name'], 'cha_max_henchman', mh)
+                            dnd_db.edit_hero(mdb, hero['name'], 'cha_loyalty', loy)
+                            dnd_db.edit_hero(mdb, hero['name'], 'cha_reaction', rea)
 
                         dnd_forms.update_hero_list(mdb, form)
                         hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
