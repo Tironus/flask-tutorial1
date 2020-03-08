@@ -77,59 +77,63 @@ def delete_hero():
 
 @app.route('/edit_hero', methods=["GET", "POST"])
 def edit_hero():
+    hero_data = ""
     mdb = dnd_extensions.mongo_client.OSRIC
     form = dnd_forms.EditHeroForm()
     dnd_forms.update_hero_list(mdb, form)
     hero_dict = dict(form.hero_id.choices)
-    hero = hero_dict[1]
-    hero = dnd_db.find_name(mdb, hero)
-    hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
-    if request.method == "POST":
-        if len(dict(form.hero_id.choices)) <= 0:
-            flash("no hero available to delete...")
-        else:
-            hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
-            hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
-            dnd_forms.update_hero_list(mdb, form)
-            if form.display_hero.data is True:
-                dnd_forms.update_hero_list(mdb, form)
+    if len(hero_dict) <= 0:
+        flash("no hero data to edit...")
+    else:
+        hero = hero_dict[1]
+        hero = dnd_db.find_name(mdb, hero)
+        hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
+        if request.method == "POST":
+            if len(dict(form.hero_id.choices)) <= 0:
+                flash("no hero available to delete...")
+            else:
                 hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
                 hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
-                dnd_forms.clear_edit_fields(form)
-                return render_template('edit_hero.html', form=form, hero_data=hero_data)
-            else:
-                if form.submit.data is True:
-                    if form.hero_name.data != "":
-                        dnd_db.edit_hero(mdb, hero['name'], 'name', form.hero_name.data)
-                        dnd_forms.update_hero_list(mdb, form)
-                        hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
-                        hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
-
-                    if form.strength.data != "":
-                        dnd_db.edit_hero(mdb, hero['name'], 'strength', form.strength.data)
-                        to_hit_bonus, damage_bonus, encumbrance_bonus, str_minor_tests_bonus, str_major_tests_bonus = dnd_calc.calc_strength(form.strength.data)
-                        dnd_db.edit_hero(mdb, hero['name'], 'str_to_hit', to_hit_bonus)
-                        dnd_db.edit_hero(mdb, hero['name'], 'str_damage', damage_bonus)
-                        dnd_db.edit_hero(mdb, hero['name'], 'str_encumbrance:', encumbrance_bonus)
-                        dnd_db.edit_hero(mdb, hero['name'], 'str_min_test:', str_minor_tests_bonus)
-                        dnd_db.edit_hero(mdb, hero['name'], 'str_maj_test:', str_major_tests_bonus)
-
-                    if form.dexterity.data != "":
-                        dnd_db.edit_hero(mdb, hero['name'], 'dexterity', form.dexterity.data)
-                        surprise_bonus, missile_bonus_to_hit, ac_adjustment = dnd_calc.calc_dexterity(form.dexterity.data)
-                        dnd_db.edit_hero(mdb, hero['name'], 'dxt_surprise', surprise_bonus)
-                        dnd_db.edit_hero(mdb, hero['name'], 'dxt_missile_to_hit', missile_bonus_to_hit)
-                        dnd_db.edit_hero(mdb, hero['name'], 'dxt_ac:', ac_adjustment)
-
+                dnd_forms.update_hero_list(mdb, form)
+                if form.display_hero.data is True:
                     dnd_forms.update_hero_list(mdb, form)
                     hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
                     hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
                     dnd_forms.clear_edit_fields(form)
                     return render_template('edit_hero.html', form=form, hero_data=hero_data)
                 else:
-                    dnd_forms.update_hero_list(mdb, form)
-                    dnd_forms.clear_edit_fields(form)
-                    return render_template('edit_hero.html', form=form, hero_data=hero_data)
+                    if form.submit.data is True:
+                        if form.hero_name.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'name', form.hero_name.data)
+                            dnd_forms.update_hero_list(mdb, form)
+                            hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
+                            hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
+
+                        if form.strength.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'strength', form.strength.data)
+                            to_hit_bonus, damage_bonus, encumbrance_bonus, str_minor_tests_bonus, str_major_tests_bonus = dnd_calc.calc_strength(form.strength.data)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_to_hit', to_hit_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_damage', damage_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_encumbrance:', encumbrance_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_min_test:', str_minor_tests_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'str_maj_test:', str_major_tests_bonus)
+
+                        if form.dexterity.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'dexterity', form.dexterity.data)
+                            surprise_bonus, missile_bonus_to_hit, ac_adjustment = dnd_calc.calc_dexterity(form.dexterity.data)
+                            dnd_db.edit_hero(mdb, hero['name'], 'dxt_surprise', surprise_bonus)
+                            dnd_db.edit_hero(mdb, hero['name'], 'dxt_missile_to_hit', missile_bonus_to_hit)
+                            dnd_db.edit_hero(mdb, hero['name'], 'dxt_ac:', ac_adjustment)
+
+                        dnd_forms.update_hero_list(mdb, form)
+                        hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
+                        hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
+                        dnd_forms.clear_edit_fields(form)
+                        return render_template('edit_hero.html', form=form, hero_data=hero_data)
+                    else:
+                        dnd_forms.update_hero_list(mdb, form)
+                        dnd_forms.clear_edit_fields(form)
+                        return render_template('edit_hero.html', form=form, hero_data=hero_data)
     dnd_forms.update_hero_list(mdb, form)
     return render_template('edit_hero.html', form=form, hero_data=hero_data)
 
