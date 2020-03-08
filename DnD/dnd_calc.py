@@ -142,6 +142,7 @@ def calc_dexterity(dex_score):
     return surprise_bonus, missile_bonus_to_hit, ac_adjustment
 
 def calc_constitution(con_score, cclass):
+    con_score = int(con_score)
     hpb = 0
     maj = 0
     min = 0
@@ -243,6 +244,7 @@ def calc_intelligence(int_score):
     return al
 
 def calc_charisma(c_score):
+    c_score = int(c_score)
     mh = 0
     loy = 0
     rea = 0
@@ -303,12 +305,13 @@ def calc_charisma(c_score):
     return mh, loy, rea
 
 def calc_wisdom(w_score):
+    w_score = int(w_score)
     mst = 0
     if w_score == 3:
         mst += -3
     elif w_score == 4:
         mst += -2
-    elif w_score >= 5 or w_score <= 7:
+    elif w_score >= 5 and w_score <= 7:
         mst += -1
     elif w_score == 15:
         mst += 1

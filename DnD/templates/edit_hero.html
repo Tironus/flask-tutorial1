@@ -59,6 +59,28 @@ OSRIC DnD - Edit a Hero
                 <h4>{{ form.dexterity }}</h4>
             </div>
         </div>
+        <div class="row">
+            <div class="column">
+                <h4>{{ form.wisdom.label }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ hero_data.wisdom }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ form.wisdom }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>{{ form.constitution.label }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ hero_data.constitution }}</h4>
+            </div>
+            <div class="column">
+                <h4>{{ form.constitution }}</h4>
+            </div>
+        </div>
         <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}

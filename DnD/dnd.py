@@ -102,6 +102,7 @@ def edit_hero():
                     dnd_forms.clear_edit_fields(form)
                     return render_template('edit_hero.html', form=form, hero_data=hero_data)
                 else:
+                    print(hero)
                     if form.submit.data is True:
                         if form.hero_name.data != "":
                             dnd_db.edit_hero(mdb, hero['name'], 'name', form.hero_name.data)
@@ -123,10 +124,26 @@ def edit_hero():
                             dnd_db.edit_hero(mdb, hero['name'], 'dxt_missile_to_hit', missile_bonus_to_hit)
                             dnd_db.edit_hero(mdb, hero['name'], 'dxt_ac:', ac_adjustment)
 
+                        if form.wisdom.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'wisdom', form.wisdom.data)
+                            mst = dnd_calc.calc_wisdom(form.wisdom.data)
+                            dnd_db.edit_hero(mdb, hero['name'], 'wis_mental_save', mst)
+
+                        if form.constitution.data != "":
+                            dnd_db.edit_hero(mdb, hero['name'], 'constitution', form.constitution.data)
+                            hpb, maj, min = dnd_calc.calc_constitution(form.constitution.data, hero['class'])
+                            print(hpb)
+                            print(maj)
+                            print(min)
+                            dnd_db.edit_hero(mdb, hero['name'], 'con_hp', hpb)
+                            dnd_db.edit_hero(mdb, hero['name'], 'con_maj_test', maj)
+                            dnd_db.edit_hero(mdb, hero['name'], 'con_min_test', min)
+
                         dnd_forms.update_hero_list(mdb, form)
                         hero = dnd_db.find_name(mdb, dict(form.hero_id.choices).get(int(form.hero_id.data)))
                         hero_data = dnd_db.display_id(mdb, ObjectId(hero['_id']))
                         dnd_forms.clear_edit_fields(form)
+                        print(hero)
                         return render_template('edit_hero.html', form=form, hero_data=hero_data)
                     else:
                         dnd_forms.update_hero_list(mdb, form)
