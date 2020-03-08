@@ -10,6 +10,13 @@ def update_hero_list(mdb, form):
         form.hero_id.choices = hero_list
     elif form.__name__() == 'DeleteHeroForm':
         form.hero_id.choices = hero_list
+    elif form.__name__() == 'EditHeroForm':
+        form.hero_id.choices = hero_list
+
+def clear_edit_fields(form):
+    form.hero_name.data = ""
+    form.strength.data = ""
+    form.dexterity.data = ""
 
 
 class_choices = [('1', 'ranger'), ('2', 'cleric'), ('3', 'druid'), ('4', 'assassin'), ('5','fighter'), ('6','illusionist'), ('7','magic user'), ('8','paladin'), ('9','thief')]
@@ -20,6 +27,17 @@ sex_choices = [('1','male'), ('2','female')]
 
 class FindHeroForm(Form):
     hero = StringField('Hero Name:', validators=[DataRequired()])
+
+class EditHeroForm(Form):
+    def __name__(self):
+        return "EditHeroForm"
+
+    hero_id = SelectField('Hero:', choices=[])
+    hero_name = StringField('Name:')
+    strength = StringField('Strength:')
+    dexterity = StringField('Dexterity:')
+    display_hero = SubmitField('Get Hero Data')
+    submit = SubmitField('Edit Hero')
 
 class DeleteHeroForm(Form):
     def __name__(self):

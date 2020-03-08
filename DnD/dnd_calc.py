@@ -99,6 +99,7 @@ def calc_strength(strength_score):
     return to_hit_bonus, damage_bonus, encumbrance_bonus, str_minor_tests_bonus, str_major_tests_bonus
 
 def calc_dexterity(dex_score):
+    dex_score = int(dex_score)
     surprise_bonus = 0
     missile_bonus_to_hit = 0
     ac_adjustment = 0

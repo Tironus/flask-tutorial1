@@ -71,6 +71,12 @@ def find_all_names(col):
         counter += 1
     return hero_list
 
+def edit_hero(mongo_db, name, attribute, new_value):
+    query = {'name': name}
+    attr = {attribute: new_value}
+    result = mongo_db.dnd.find_one_and_update(query, {'$set': attr})
+    return result
+
 def calculate_character(mongo_db, form_data):
     attributes_list = []
 
